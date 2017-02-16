@@ -13,7 +13,7 @@ Vue.use(VueRouter)
 // 定义一个vue-router实例
 const router = new VueRouter({ // Vue-router 2.0X
   routes: [
-    { path: '/Home', component: Home, redirect: { '*': '/Home' } }
+    { path: '/home', component: Home, redirect: '/home' }
   ]
 })
 
@@ -21,5 +21,7 @@ const router = new VueRouter({ // Vue-router 2.0X
 new Vue({ // eslint-disable-line no-new
   el: '#app',
   router: router,
-  template: App
+  components: {
+    'app': App
+  }
 })
