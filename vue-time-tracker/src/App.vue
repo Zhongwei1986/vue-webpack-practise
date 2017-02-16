@@ -1,23 +1,43 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
+  <div id="wraper">
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <a href="#" class="navbar-brand">
+          <i class="glyphicon glyphicon-time"></i> 计划表
+        </a>
+        <ul class="nav navbar-nav">
+          <li>
+            <router-link to="/home">首页</router-link>
+          </li>
+          <li>
+            <<router-link to="/time-entries">计划列表</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-9">
+          <router-vier></router-vier>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
-export default {
-  name: 'app'
-}
+  export default {
+    name: 'app'
+  }
 </script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
 </style>
