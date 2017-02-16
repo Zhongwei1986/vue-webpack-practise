@@ -18,7 +18,7 @@ const router = new VueRouter({ // Vue-router 2.0X
 })
 
 // 初始化router
-Vue({
+new Vue({ // eslint-disable-line no-new
   el: '#app',
   router: router,
   template: App
