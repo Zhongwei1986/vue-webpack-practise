@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Home from './components/Home.vue'
+import TimeEntries from './components/TimeEntries.vue'
 
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
@@ -13,8 +14,8 @@ Vue.use(VueRouter)
 // 定义一个vue-router实例
 const router = new VueRouter({ // Vue-router 2.0X
   routes: [
-    { path: '/home', name: 'home', component: Home },
-    { path: '/time-entries', name: 'time-entries', component: timeEntries }
+    { path: '/home', component: Home },
+    { path: '/time-entries', component: TimeEntries }
   ]
 })
 
