@@ -13,7 +13,8 @@ Vue.use(VueRouter)
 // 定义一个vue-router实例
 const router = new VueRouter({ // Vue-router 2.0X
   routes: [
-    { path: '/home', component: Home, redirect: '/home' }
+    { path: '/home', name: 'home', component: Home },
+    { path: '/time-entries', name: 'time-entries', component: timeEntries }
   ]
 })
 
