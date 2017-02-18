@@ -2,6 +2,7 @@
   <div id="wraper">
     <nav class="navbar navbar-default">
       <div class="container">
+
         <a href="#" class="navbar-brand">
           <i class="glyphicon glyphicon-time"></i> 计划表
         </a>
@@ -18,11 +19,35 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
+          <sidebar :time="totalTime"></sidebar>
         </div>
         <div class="col-sm-9">
-         <router-view></router-view>
+          <keep-alive>
+           <router-view></router-view>
+          </keep-alive>        
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+  import Sidebar from './components/Sidebar.vue'
+
+  export default {
+    components: { 'sidebar': Sidebar }, // 注册sidebar组件用于<sidebar>
+    data () { // ES6简写，相当于data: function(){}
+      return {
+        totalTime: 1.5
+      }
+    },
+    methods: {
+      timeUpdate (timeEntry) { // 相当于timeUpdate: function(timeEntry){}
+        this.totalTime += parseFloat(timeEntry.totalTime)
+      },
+      deleteTime (timeEntry) {
+        this.totalTime -= parseFloat(timeEntry.totalTime)
+      }
+    }
+  }
+</script>
