@@ -19,11 +19,13 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
-          <sidebar :time="totalTime"></sidebar>
-        </div>
+          <sidebar :time="totalTime"></div>
         <div class="col-sm-9">
           <keep-alive>
-           <router-view></router-view>
+           <router-view
+           @deleteTime='deleteTime'
+           @timeUpdate='timeUpdate'>
+           ></router-view>
           </keep-alive>        
         </div>
       </div>
@@ -42,11 +44,11 @@
       }
     },
     methods: {
-      timeUpdate (timeEntry) { // 相当于timeUpdate: function(timeEntry){}
-        this.totalTime += parseFloat(timeEntry.totalTime)
+      timeUpdate (totalTime) { // 相当于timeUpdate: function(timeEntry){}
+        this.totalTime += totalTime
       },
-      deleteTime (timeEntry) {
-        this.totalTime -= parseFloat(timeEntry.totalTime)
+      deleteTime (totalTime) {
+        this.totalTime -= totalTime
       }
     }
   }

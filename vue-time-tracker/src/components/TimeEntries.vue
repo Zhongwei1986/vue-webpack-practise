@@ -12,9 +12,9 @@
     </div>
     <hr>
 
-    <router-view :timeEntries = 'timeEntries' @addNewEntry= 'entriesUpdate(timeEntry)'></router-view>
-
-    <div v-if="$route.path !== '/time-entries/log-time'" class="time-entries">
+    <router-view @addNewEntry= 'entriesUpdate'></router-view>
+    <hr>
+    <div class="time-entries">
       <p v-if="!timeEntries.length"><strong>还没有任何任务</strong></p>
       <div class="list-group">
         <a class="list-group-item" v-for="timeEntry in timeEntries">
@@ -28,7 +28,7 @@
                 <i class="glyphicon glyphicon-time"></i> {{ timeEntry.totalTime}}
               </h3>
               <p class="label label-primary text-center">
-                <i class="glyphocon glyphicon-canlendar"></i> {{ timeEntry.data}}
+                <i class="glyphocon glyphicon-canlendar"></i> {{ timeEntry.date}}
               </p>
             </div>
             <div class="col-sm-7 comment-section">
@@ -47,35 +47,40 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      let existingEntry = {
-        user: {
-          name: 'zhongwei',
-          email: 'zhouzhongwei1986@sina.com',
-          image: 'https://sfault-avatar.b0.upaiyun.com/888/223/888223038-5646dbc28d530_huge256'
-        },
-        comment: '我的一个备注',
-        totalTime: 1.5,
-        data: '2017.02.17'
-      }
-      return {
-        timeEntries: [existingEntry]
+import LogTime from './LogTime'
+export default {
+  components: {
+    LogTime
+  },
+  data () {
+    let existingEntry = {
+      user: {
+        name: 'zhongwei',
+        email: 'zhouzhongwei1986@sina.com',
+        image: 'https://sfault-avatar.b0.upaiyun.com/888/223/888223038-5646dbc28d530_huge256'
+      },
+      comment: '我的一个备注',
+      totalTime: 1.5,
+      date: '2017.02.17'
+    }
+    return {
+      timeEntries: [existingEntry]
+    }
+  },
+  methods: {
+    deleteTimeEntry (timeEntry) {
+      let index = this.timeEntries.indexOf(timeEntry)
+      if (window.confirm('确定要删除吗？')) {
+        this.timeEntries.splice(index, 1)
+        this.$emit('deleteTime', timeEntry.totalTime)
       }
     },
-    methods: {
-      deleteTimeEntry (timeEntry) {
-        let index = this.timeEntries.indexOf(timeEntry)
-        if (window.confirm('确定要删除吗？')) {
-          this.timeEntries.splice(index, 1)
-        }
-      },
-      entriesUpdate (timeEntry) {
-        this.timeEntries.push(timeEntry)
-        return true
-      }
+    entriesUpdate (timeEntry) {
+      this.timeEntries.push(timeEntry)
+      this.$emit('timeUpdate', timeEntry.totalTime)
     }
   }
+}
 </script>
 
 <style>

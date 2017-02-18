@@ -1,9 +1,9 @@
 <template>
-  <div class="form-horizontal">
+  <div class="form-horizontal">    
     <div class="form-group">
       <div class="col-sm-6">
         <label for="">日期</label>
-        <input type="data" class="form-control" v-model="timeEntry.date" placeholder="Date" />
+        <input type="date" class="form-control" v-model="timeEntry.date" placeholder="Date" />  
       </div>
       <div class="col-sm-6">
         <label for="">时间</label>
@@ -39,8 +39,9 @@
     methods: {
       save: function () {
         let timeEntry = this.timeEntry
-        this.timeEntries.push(timeEntry)
-        this.$emit('addNewEntry', timeEntry)
+        if (timeEntry.date && timeEntry.totalTime && timeEntry.comment) {
+          this.$emit('addNewEntry', timeEntry)
+        }
       }
     }
   }
