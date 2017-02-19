@@ -20,8 +20,8 @@
         <a class="list-group-item" v-for="timeEntry in timeEntries">
           <div class="row">
             <div class="col-sm-2 user-details">
-              <img :src="timeEntry.user.image" class="avata img-circle img-responsive">
-              <p class="text-center"><strong>{{ timeEntry.user.name}}</strong></p>
+              <img src="https://avatars1.githubusercontent.com/u/10184444?v=3&s=460" class="avatar img-circle img-responsive">
+              <p class="text-center"><strong>zhongwei</strong></p>
             </div>
             <div class="col-sm-2 text-center time-block">
               <h3 class="list-group-item-text total-time">
@@ -53,18 +53,18 @@ export default {
     LogTime
   },
   data () {
-    let existingEntry = {
-      user: {
-        name: 'zhongwei',
-        email: 'zhouzhongwei1986@sina.com',
-        image: 'https://sfault-avatar.b0.upaiyun.com/888/223/888223038-5646dbc28d530_huge256'
-      },
-      comment: '我的一个备注',
-      totalTime: 1.5,
-      date: '2017.02.17'
-    }
+    // let existingEntry = {
+    //   user: {
+    //     name: 'zhongwei',
+    //     email: 'zhouzhongwei1986@sina.com',
+    //     image: 'https://sfault-avatar.b0.upaiyun.com/888/223/888223038-5646dbc28d530_huge256'
+    //   },
+    //   comment: '我的一个备注',
+    //   totalTime: 1.5,
+    //   date: '2017.02.17'
+    // }
     return {
-      timeEntries: [existingEntry]
+      timeEntries: []
     }
   },
   methods: {

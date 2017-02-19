@@ -40,7 +40,7 @@
     components: { 'sidebar': Sidebar }, // 注册sidebar组件用于<sidebar>
     data () { // ES6简写，相当于data: function(){}
       return {
-        totalTime: 1.5
+        totalTime: 0
       }
     },
     methods: {
