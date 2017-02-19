@@ -22,10 +22,10 @@
           <sidebar :time="totalTime"></div>
         <div class="col-sm-9">
           <keep-alive>
-           <router-view
+           <router-view 
            @deleteTime='deleteTime'
            @timeUpdate='timeUpdate'>
-           ></router-view>
+           </router-view>
           </keep-alive>        
         </div>
       </div>
@@ -50,6 +50,18 @@
       deleteTime (totalTime) {
         this.totalTime -= totalTime
       }
+    },
+    mounted () {
+      this.$nextTick(function () {
+        this.$http.get('http://localhost:8888/time')
+          .then(function (ret) {
+            // console.log(ret)
+            this.totalTime = ret.data.time
+          })
+          .then(function (err) {
+            console.log(err)
+          })
+      })
     }
   }
 </script>

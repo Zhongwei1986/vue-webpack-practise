@@ -43,11 +43,13 @@
           totalTime: this.timeEntry.totalTime,
           date: this.timeEntry.date
         }).then(function (res) {
-          console.log(res)
-          let timeEntry = this.timeEntry
-          console.log(timeEntry)
-          this.$emit('addNewEntry', timeEntry)
-          this.timeEntry = {}
+          if (res.body.errcode !== -1) {
+            let timeEntry = this.timeEntry
+            this.$emit('addNewEntry', timeEntry)
+            this.timeEntry = {}
+          } else {
+            alert('请输入所有字段')
+          }
         })
       }
     }

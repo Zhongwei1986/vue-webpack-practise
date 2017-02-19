@@ -12,7 +12,7 @@
     </div>
     <hr>
 
-    <router-view @addNewEntry= 'entriesUpdate'></router-view>
+    <router-view @addNewEntry='entriesUpdate'></router-view>
     <hr>
     <div class="time-entries">
       <p v-if="!timeEntries.length"><strong>还没有任何任务</strong></p>
@@ -67,10 +67,30 @@ export default {
       timeEntries: []
     }
   },
+  created () {
+    this.getTimeEntries()
+  },
   methods: {
+    getTimeEntries () {
+      this.$http.get('http://localhost:8888/time-entries')
+        .then(function (ret) {
+          this.timeEntries = ret.data
+        })
+        .then(function (err) {
+          console.log(err)
+        })
+    },
     deleteTimeEntry (timeEntry) {
       let index = this.timeEntries.indexOf(timeEntry)
+      let _id = this.timeEntries[index]._id
       if (window.confirm('确定要删除吗？')) {
+        this.$http.delete('http://localhost:8888/delete/' + _id)
+          .then(function (ret) {
+            console.log(ret)
+          })
+          .then(function (err) {
+            console.log(err)
+          })
         this.timeEntries.splice(index, 1)
         this.$emit('deleteTime', timeEntry.totalTime)
       }
