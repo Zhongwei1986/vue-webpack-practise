@@ -38,10 +38,17 @@
     },
     methods: {
       save: function () {
-        let timeEntry = this.timeEntry
-        if (timeEntry.date && timeEntry.totalTime && timeEntry.comment) {
+        this.$http.post('http://localhost:8888/create', {
+          comment: this.timeEntry.comment,
+          totalTime: this.timeEntry.totalTime,
+          date: this.timeEntry.date
+        }).then(function (res) {
+          console.log(res)
+          let timeEntry = this.timeEntry
+          console.log(timeEntry)
           this.$emit('addNewEntry', timeEntry)
-        }
+          this.timeEntry = {}
+        })
       }
     }
   }
