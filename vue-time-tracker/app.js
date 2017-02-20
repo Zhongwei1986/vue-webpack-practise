@@ -95,8 +95,8 @@ app.get('/time-entries', function(req, res, next) {
 app.delete('/delete/:id', function(req, res, next) {
   var _id = req.params.id;
   var collection = _db.collection('my_mission');
-  console.log(_id)
-    //使用mongodb的唯一ObjectId字段查找出对应id删除记录
+  console.log(_id);
+  //使用mongodb的唯一ObjectId字段查找出对应id删除记录
   collection.remove({ _id: new ObjectID(_id) }, function(err, ret) {
     if (err) {
       console.error(err);
