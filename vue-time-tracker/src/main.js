@@ -14,17 +14,20 @@ Vue.use(VueRouter)
 
 // 定义一个vue-router实例
 const router = new VueRouter({ // Vue-router 2.0X
-  routes: [
-    { path: '/', component: Home },
-    { path: '/home', component: Home },
-    {
-      path: '/time-entries',
-      component: TimeEntries,
-      children: [
-        { path: 'log-time', component: LogTime }
-      ]
-    }
-  ]
+  routes: [{
+    path: '/',
+    component: Home
+  }, {
+    path: '/home',
+    component: Home
+  }, {
+    path: '/time-entries',
+    component: TimeEntries,
+    children: [{
+      path: 'log-time',
+      component: LogTime
+    }]
+  }]
 })
 
 // 初始化Vue实例

@@ -19,14 +19,13 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
-          <sidebar :time="totalTime"></div>
+          <sidebar :time="totalTime">
+        </div>
         <div class="col-sm-9">
           <keep-alive>
-           <router-view 
-           @deleteTime='deleteTime'
-           @timeUpdate='timeUpdate'>
-           </router-view>
-          </keep-alive>        
+            <router-view @deleteTime='deleteTime' @timeUpdate='timeUpdate'>
+            </router-view>
+          </keep-alive>
         </div>
       </div>
     </div>
