@@ -2,7 +2,6 @@
   <div id="wraper">
     <nav class="navbar navbar-default">
       <div class="container">
-
         <a href="#" class="navbar-brand">
           <i class="glyphicon glyphicon-time"></i> 计划表
         </a>
@@ -36,7 +35,9 @@
   import Sidebar from './components/Sidebar.vue'
 
   export default {
-    components: { 'sidebar': Sidebar }, // 注册sidebar组件用于<sidebar>
+    components: {
+      'sidebar': Sidebar
+    }, // 注册sidebar组件用于<sidebar>
     data () { // ES6简写，相当于data: function(){}
       return {
         totalTime: 0

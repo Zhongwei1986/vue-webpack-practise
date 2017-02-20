@@ -82,9 +82,10 @@ app.get('/time', function (req, res, next) {
     }
     // 所有计划累加时长
     ret.forEach(function (item, index) {
-        time += item.totalTime
-      })
-      // 返回时长
+      time += item.totalTime
+    })
+
+    // 返回时长
     res.json({
       errcode: 0,
       errmsg: 'ok',
