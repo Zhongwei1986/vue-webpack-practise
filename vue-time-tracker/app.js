@@ -85,7 +85,7 @@ app.get('/time-entries', function(req, res, next) {
   collection.find({}).toArray(function(err, ret) {
     if (err) {
       console.error(err);
-      return;
+      return
     }
     res.json(ret);
   });
