@@ -27,13 +27,7 @@
     props: ['timeEntries'],
     data () {
       return {
-        timeEntry: {
-          // user: {
-          //   name: 'zhongwei',
-          //   email: 'kodo@forchange.cn',
-          //   image: 'https://sfault-avatar.b0.upaiyun.com/888/223/888223038-5646dbc28d530_huge256'
-          // }
-        }
+        timeEntry: { }
       }
     },
     methods: {

@@ -47,11 +47,7 @@
 </template>
 
 <script>
-import LogTime from './LogTime'
 export default {
-  components: {
-    LogTime
-  },
   data () {
     // let existingEntry = {
     //   user: {
@@ -74,7 +70,7 @@ export default {
     getTimeEntries () {
       this.$http.get('http://localhost:8888/time-entries')
         .then(function (ret) {
-          this.timeEntries = ret.data
+          this.timeEntries = ret.data  // data中每个元素拥有从数据库返回的_id字段名
         })
         .then(function (err) {
           console.log(err)
@@ -85,9 +81,6 @@ export default {
       let _id = this.timeEntries[index]._id
       if (window.confirm('确定要删除吗？')) {
         this.$http.delete('http://localhost:8888/delete/' + _id)
-          .then(function (ret) {
-            console.log(ret)
-          })
           .then(function (err) {
             console.log(err)
           })

@@ -108,12 +108,12 @@ app.get('/time-entries', function (req, res, next) {
 
 // 删除计划
 app.delete('/delete/:id', function (req, res, next) {
-  var _id = req.params.id
+  var _id = req.params.id // req.params是请求参数，也就是{id:XXXXXX},该id是数据库返给前端的
   var collection = _db.collection('my_mission')
-  console.log(_id)
+  console.log(req.params)
     // 使用mongodb的唯一ObjectId字段查找出对应id删除记录
   collection.remove({
-    _id: new ObjectID(_id)
+    _id: new ObjectID(_id) // 生成ObjectID对象，用于定位对应文档
   }, function (err, ret) {
     if (err) {
       console.error(err)

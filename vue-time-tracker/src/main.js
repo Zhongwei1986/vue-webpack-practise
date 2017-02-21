@@ -4,6 +4,8 @@ import App from './App.vue'
 import Home from './components/Home.vue'
 import TimeEntries from './components/TimeEntries.vue'
 import LogTime from './components/LogTime.vue'
+import SignUp from './components/SignUp.vue'
+import SignIn from './components/SignIn.vue'
 
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
@@ -16,7 +18,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({ // Vue-router 2.0X
   routes: [{
     path: '/',
-    component: Home
+    component: App
   }, {
     path: '/home',
     component: Home
@@ -27,6 +29,12 @@ const router = new VueRouter({ // Vue-router 2.0X
       path: 'log-time',
       component: LogTime
     }]
+  }, {
+    path: '/sign-li',
+    component: SignIn
+  }, {
+    path: '/sign-up',
+    component: SignUp
   }]
 })
 
