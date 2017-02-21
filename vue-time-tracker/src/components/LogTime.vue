@@ -24,7 +24,7 @@
 
 <script>
   export default {
-    props: ['timeEntries'],
+    props: ['timeEntries', 'username'],
     data () {
       return {
         timeEntry: { }

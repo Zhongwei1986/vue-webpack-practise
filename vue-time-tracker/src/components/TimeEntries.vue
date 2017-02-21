@@ -48,17 +48,8 @@
 
 <script>
 export default {
+  props: ['usrname'],
   data () {
-    // let existingEntry = {
-    //   user: {
-    //     name: 'zhongwei',
-    //     email: 'zhouzhongwei1986@sina.com',
-    //     image: 'https://sfault-avatar.b0.upaiyun.com/888/223/888223038-5646dbc28d530_huge256'
-    //   },
-    //   comment: '我的一个备注',
-    //   totalTime: 1.5,
-    //   date: '2017.02.17'
-    // }
     return {
       timeEntries: []
     }

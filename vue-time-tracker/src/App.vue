@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="container">
-      <p class="text-center text-info">请注册/登陆使用本APP！</p>
+      <h1 class="text-center text-warning">请注册/登陆后使用本APP！</h1>
     </div>
   </div>
 </template>
@@ -79,7 +79,7 @@
         this.signStatus = true
         this.username = userData.username
         this.avatar = userData.avatar
-        this.$http.get('http://localhost:8888/time')
+        this.$http.get('http://localhost:8888/time' + this.username)
         .then(function (ret) {
           // console.log(ret)
           this.totalTime = ret.data.time
