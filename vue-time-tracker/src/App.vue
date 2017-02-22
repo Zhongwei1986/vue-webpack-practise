@@ -24,14 +24,14 @@
             </li>
           </ul>
           <ul v-if="signStatus" class="nav navbar-nav navbar-right">
-            <li> {{username}}</li>
-            <li> <img :src="avatar"> </li>
+            <li> <a href="">{{username}}</a></li>
+            <li> <a href=""><img :src="avatar"></a></li>
           </ul>
         </div>
       </nav>
       <router-view
-       @signUpOK='signUp()'
-       @signInOk="signIn()"    
+       @signUpOK='signUp'
+       @signInOk="signIn"    
       ></router-view>      
     </div>
 </template>
@@ -49,9 +49,10 @@
     methods: {
       signUp (userData) {
         this.signStatus = true
+        console.log('登陆成功')
         this.username = userData.username
         this.avatar = userData.avatar
-        this.$http.get('http://localhost:8888/time-entries' + this.username)
+        this.$http.get('http://localhost:8888/time-entries', this.username)
         .then(function (ret) {
           // console.log(ret)
           this.totalTime = ret.data.time

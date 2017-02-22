@@ -58,8 +58,8 @@ export default {
       this.$http.post('http://localhost:8888/users', {user})
       .then(function (res) {
         if (res.data.errcode === 0) {
-          this.$emit('signUpOk', {
-            name: this.username,
+          this.$emit('signUpOK', {
+            username: this.username,
             avatar: file
           })
         }

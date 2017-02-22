@@ -55,11 +55,11 @@ app.post('/users', function (req, res, next) {
   })
 })
 
-
+// 增加列表
 app.post('/create', function (req, res, next) {
-  // 接受前端发送的字段
   var mission = req.body
-    // 选择一个表，若无则自动创建
+
+  // 选择一个表，若无则自动创建
   var collection = _db.collection('my_mission')
 
   // 如果需要的字段不存在，则返回错误信息
