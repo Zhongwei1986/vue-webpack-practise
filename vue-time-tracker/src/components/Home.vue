@@ -1,11 +1,5 @@
-<template>
-  <div class="jumbotron">
-    <h3>任务追踪</h3>
-    <br>
-    <p >
-      <strong>
-         <router-link to="/time-entries/log-time">创建一个任务</router-link>
-      </strong>
-    </p>
+<template> 
+  <div class="container">
+    <h1 class="text-center text-warning">请注册/登陆后使用本APP！</h1>
   </div>
 </template>

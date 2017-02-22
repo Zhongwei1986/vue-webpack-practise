@@ -1,9 +1,9 @@
 <template>
-  <div id='sign-in'>
+  <div id='sign-in' class = "container">
     <form class="form-horizontal">
       <div class="form-group">
         <label for="username" class="col-sm-2 control-label">用户名:</label>
-        <div class="con-sm-10">
+        <div class="col-sm-10">
           <input 
           type="text" id="username" 
           class="form-control" 
@@ -13,22 +13,58 @@
       </div>
       <div class="form-group">
         <label for="password" class="col-sm-2 control-label">密码:</label>
-        <div class="con-sm-10">
+        <div class="col-sm-10">
           <input 
-          type="text" id="password" 
+          type="password" id="password" 
           class="form-control" 
           placeholder="请输入密码"
           v-model="password">
         </div>
       </div>
-      <button @click="signIn" type="submit" class="btn btn-default">登陆</button>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> 7天内免登陆
+            </label>
+          </div>
+        </div>
+     </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">       
+          <button type="submit" class="btn btn-default">登陆</button>
+        </div>
+      </div>     
     </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'sign-in'
+  name: 'sign-in',
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    signIn (username) {
+      this.signUpStauts = false
+      this.signInStatus = false
+      this.signStatus = true
+      this.$http.get('http://localhost:8888/time/' + username)
+      .then(function (ret) {
+        // console.log(ret)
+        this.totalTime = ret.data.time
+        this.username = ret.data.user.name
+        this.avatar = ret.data.user.avatar
+      })
+      .then(function (err) {
+        console.log(err)
+      })
+    }
+  }
 
 }
 </script>

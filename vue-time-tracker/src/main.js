@@ -18,7 +18,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({ // Vue-router 2.0X
   routes: [{
     path: '/',
-    component: App
+    component: Home
   }, {
     path: '/home',
     component: Home
@@ -30,7 +30,7 @@ const router = new VueRouter({ // Vue-router 2.0X
       component: LogTime
     }]
   }, {
-    path: '/sign-li',
+    path: '/sign-in',
     component: SignIn
   }, {
     path: '/sign-up',

@@ -1,46 +1,59 @@
 <template>
-  <div>
-    <router-link 
-    tag="button" 
-    v-if="$route.path !== '/time-entries/log-time'" 
-    class="btn btn-primary" 
-    to="/time-entries/log-time">
-      创建
-    </router-link>
-    <div v-if="$route.path ==='/time-entries/log-time'">
-      <h3>创建</h3>
-    </div>
-    <hr>
+  <div class="container">
+    <div class="row">
 
-    <router-view @addNewEntry='entriesUpdate'></router-view>
-    <hr>
-    <div class="time-entries">
-      <p v-if="!timeEntries.length"><strong>还没有任何任务</strong></p>
-      <div class="list-group">
-        <a class="list-group-item" v-for="timeEntry in timeEntries">
-          <div class="row">
-            <div class="col-sm-2 user-details">
-              <img src="https://avatars1.githubusercontent.com/u/10184444?v=3&s=460" class="avatar img-circle img-responsive">
-              <p class="text-center"><strong>zhongwei</strong></p>
-            </div>
-            <div class="col-sm-2 text-center time-block">
-              <h3 class="list-group-item-text total-time">
-                <i class="glyphicon glyphicon-time"></i> {{ timeEntry.totalTime}}
-              </h3>
-              <p class="label label-primary text-center">
-                <i class="glyphocon glyphicon-canlendar"></i> {{ timeEntry.date}}
-              </p>
-            </div>
-            <div class="col-sm-7 comment-section">
-              <p>{{ timeEntry.comment}}</p>
-            </div>
-            <div class="col-sm-1">
-              <button class="btn btn-xs btn-danger delete-button" @click="deleteTimeEntry(timeEntry)">
-              X
-              </button>
-            </div>
+      <div class="col-sm-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title text-center">已有计划时长</h2>
           </div>
-        </a>
+          <div class="panel-body">
+            <p class="text-center">{{ totalTime }} 小时</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-10">
+        <router-link 
+        tag="button" 
+        v-if="$route.path !== '/time-entries/log-time'" 
+        class="btn btn-primary" 
+        to="/time-entries/log-time">创建</router-link>
+       <div v-if="$route.path ==='/time-entries/log-time'">
+          <h3>创建</h3>
+        </div>
+    
+       <router-view @addNewEntry='entriesUpdate'></router-view>
+  
+       <div class="time-entries">
+         <p v-if="!timeEntries.length"><strong>还没有任何任务</strong></p>
+         <div class="list-group">
+           <a class="list-group-item" v-for="timeEntry in timeEntries">
+             <div class="row">
+               <div class="col-sm-2 user-details">
+                 <img src="https://avatars1.githubusercontent.com/u/10184444?v=3&s=460" class="avatar img-circle img-responsive">
+                 <p class="text-center"><strong>zhongwei</strong></p>
+               </div>
+               <div class="col-sm-2 text-center time-block">
+                 <h3 class="list-group-item-text total-time">
+                   <i class="glyphicon glyphicon-time"></i> {{ timeEntry.totalTime}}
+                 </h3>
+                 <p class="label label-primary text-center">
+                   <i class="glyphocon glyphicon-canlendar"></i> {{ timeEntry.date}}
+                 </p>
+               </div>
+               <div class="col-sm-7 comment-section">
+                 <p>{{ timeEntry.comment}}</p>
+               </div>
+               <div class="col-sm-1">
+                 <button class="btn btn-xs btn-danger delete-button" @click="deleteTimeEntry(timeEntry)">
+                 X
+                 </button>
+               </div>
+             </div>
+           </a>
+         </div>
+       </div>        
       </div>
     </div>
   </div>
@@ -51,7 +64,8 @@ export default {
   props: ['usrname'],
   data () {
     return {
-      timeEntries: []
+      timeEntries: [],
+      totalTime: 0
     }
   },
   created () {
@@ -81,7 +95,13 @@ export default {
     },
     entriesUpdate (timeEntry) {
       this.timeEntries.push(timeEntry)
-      this.$emit('timeUpdate', timeEntry.totalTime)
+      this.totalTime += timeEntry.totalTime
+    },
+    timeUpdate (totalTime) { // 相当于timeUpdate: function(timeEntry){}
+      this.totalTime += totalTime
+    },
+    deleteTime (totalTime) {
+      this.totalTime -= totalTime
     }
   }
 }

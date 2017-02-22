@@ -36,7 +36,26 @@ app.all('*', function (req, res, next) {
   }
 })
 
-// 使用post方法
+// 创建用户
+app.post('/users', function (req, res, next) {
+  var user = req.body
+  console.log(user)
+  var collection = _db.collection('users')
+  collection.insert(user, function (err, result) {
+    console.log(result)
+    if (err) {
+      console.error(err)
+      res.status(500).end()
+    } else {
+      res.send({
+        errcode: 0,
+        errmsg: 'ok'
+      })
+    }
+  })
+})
+
+
 app.post('/create', function (req, res, next) {
   // 接受前端发送的字段
   var mission = req.body
@@ -69,32 +88,7 @@ app.post('/create', function (req, res, next) {
   })
 })
 
-// 获取总时长
-app.get('/time', function (req, res, next) {
-  // 获取数据表
-  var collection = _db.collection('my_mission')
-  var time = 0
-    // 查询出所有计划
-  collection.find({}).toArray(function (err, ret) {
-    if (err) {
-      console.error(err)
-      return
-    }
-    // 所有计划累加时长
-    ret.forEach(function (item, index) {
-      time += item.totalTime
-    })
-
-    // 返回时长
-    res.json({
-      errcode: 0,
-      errmsg: 'ok',
-      time: time
-    })
-  })
-})
-
-// 获取列表
+// 获取列表及时间
 app.get('/time-entries', function (req, res, next) {
   var collection = _db.collection('my_mission')
   collection.find({}).toArray(function (err, ret) {
