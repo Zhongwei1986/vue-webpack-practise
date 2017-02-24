@@ -32,7 +32,7 @@
              <div class="row">
                <div class="col-sm-2 user-details">
                  <img src="https://avatars1.githubusercontent.com/u/10184444?v=3&s=460" class="avatar img-circle img-responsive">
-                 <p class="text-center"><strong>zhongwei</strong></p>
+                 <p class="text-center"><strong>{{ username }}</strong></p>
                </div>
                <div class="col-sm-2 text-center time-block">
                  <h3 class="list-group-item-text total-time">
@@ -61,7 +61,7 @@
 
 <script>
 export default {
-  props: ['usrname'],
+  props: ['username'],
   data () {
     return {
       timeEntries: [],
@@ -73,9 +73,12 @@ export default {
   },
   methods: {
     getTimeEntries () {
-      this.$http.get('http://localhost:8888/time-entries')
+      this.$http.get('http://localhost:8888/time-entries', this.username)
         .then(function (ret) {
-          this.timeEntries = ret.data  // data中每个元素拥有从数据库返回的_id字段名
+          this.timeEntries = ret.data
+          ret.data.forEach(function (item, index) {
+            this.totalTime += item.totalTime
+          })
         })
         .then(function (err) {
           console.log(err)

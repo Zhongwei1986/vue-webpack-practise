@@ -31,7 +31,8 @@
       </nav>
       <router-view
        @signUpOK='signUp'
-       @signInOk="signIn"    
+       @signInOk="signIn"  
+       :username = "username"         
       ></router-view>      
     </div>
 </template>
@@ -52,14 +53,6 @@
         console.log('登陆成功')
         this.username = userData.username
         this.avatar = userData.avatar
-        this.$http.get('http://localhost:8888/time-entries', this.username)
-        .then(function (ret) {
-          // console.log(ret)
-          this.totalTime = ret.data.time
-        })
-        .then(function (err) {
-          console.log(err)
-        })
       },
       signIn (username) {
         this.signUpStauts = false
