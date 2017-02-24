@@ -49,11 +49,8 @@ export default {
     }
   },
   methods: {
-    signIn (username) {
-      this.signUpStauts = false
-      this.signInStatus = false
-      this.signStatus = true
-      this.$http.get('http://localhost:8888/time/' + username)
+    signIn () {
+      this.$http.get('http://localhost:8888/time/')
       .then(function (ret) {
         // console.log(ret)
         this.totalTime = ret.data.time

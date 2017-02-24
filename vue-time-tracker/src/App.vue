@@ -24,13 +24,13 @@
             </li>
           </ul>
           <ul v-if="signStatus" class="nav navbar-nav navbar-right">
-            <li> <a href="">{{username}}</a></li>
-            <li> <a href=""><img :src="avatar"></a></li>
+            <li> <a>{{username}}</a></li>
+            <li> <a><img :src="avatar"></a></li>
           </ul>
         </div>
       </nav>
       <router-view
-       @signUpOK='signUp'
+       @signUpOK='signIn'
        @signInOk="signIn"  
        :username = "username"         
       ></router-view>      
@@ -48,26 +48,12 @@
       }
     },
     methods: {
-      signUp (userData) {
+      signIn (userData) {
         this.signStatus = true
         console.log('登陆成功')
         this.username = userData.username
         this.avatar = userData.avatar
-      },
-      signIn (username) {
-        this.signUpStauts = false
-        this.signInStatus = false
-        this.signStatus = true
-        this.$http.get('http://localhost:8888/time/' + username)
-        .then(function (ret) {
-          // console.log(ret)
-          this.totalTime = ret.data.time
-          this.username = ret.data.user.name
-          this.avatar = ret.data.user.avatar
-        })
-        .then(function (err) {
-          console.log(err)
-        })
+        this.$router.push('time-entries')
       }
     }
   }

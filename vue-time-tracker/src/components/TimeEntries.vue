@@ -85,26 +85,21 @@ export default {
         })
     },
     deleteTimeEntry (timeEntry) {
-      let index = this.timeEntries.indexOf(timeEntry)
-      let _id = this.timeEntries[index]._id
+      var index = this.timeEntries.indexOf(timeEntry)
+      var _id = timeEntry._id
+      var username = this.username
       if (window.confirm('确定要删除吗？')) {
-        this.$http.delete('http://localhost:8888/delete/' + _id)
+        this.$http.delete('http://localhost:8888/delete/' + username + '/' + _id)
           .then(function (err) {
             console.log(err)
           })
+        this.totalTime -= timeEntry.totalTime
         this.timeEntries.splice(index, 1)
-        this.$emit('deleteTime', timeEntry.totalTime)
       }
     },
     entriesUpdate (timeEntry) {
       this.timeEntries.push(timeEntry)
       this.totalTime += timeEntry.totalTime
-    },
-    timeUpdate (totalTime) { // 相当于timeUpdate: function(timeEntry){}
-      this.totalTime += totalTime
-    },
-    deleteTime (totalTime) {
-      this.totalTime -= totalTime
     }
   }
 }

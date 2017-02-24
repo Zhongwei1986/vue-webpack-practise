@@ -27,12 +27,14 @@
     props: ['timeEntries', 'username'],
     data () {
       return {
-        timeEntry: { }
+        timeEntry: {},
+        username: ''
       }
     },
     methods: {
       save: function () {
-        this.$http.post('http://localhost:8888/create', {
+        var username = this.username
+        this.$http.post('http://localhost:8888/create/' + username, {
           comment: this.timeEntry.comment,
           totalTime: this.timeEntry.totalTime,
           date: this.timeEntry.date
