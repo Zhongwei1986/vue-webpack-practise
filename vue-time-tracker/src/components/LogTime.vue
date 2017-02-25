@@ -27,8 +27,7 @@
     props: ['timeEntries', 'username'],
     data () {
       return {
-        timeEntry: {},
-        username: ''
+        timeEntry: {}
       }
     },
     methods: {
@@ -40,7 +39,10 @@
           date: this.timeEntry.date
         }).then(function (res) {
           if (res.body.errcode !== -1) {
-            let timeEntry = this.timeEntry
+            var timeEntry = this.timeEntry
+            timeEntry.id = res.body.id
+            console.log(res)
+            console.log(timeEntry)
             this.$emit('addNewEntry', timeEntry)
             this.timeEntry = {}
           } else {

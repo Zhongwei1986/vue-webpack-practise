@@ -17,6 +17,9 @@ Vue.use(VueRouter)
 // 定义一个vue-router实例
 const router = new VueRouter({ // Vue-router 2.0X
   routes: [{
+    path: '/',
+    component: Home
+  }, {
     path: '/home',
     component: Home
   }, {

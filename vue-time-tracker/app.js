@@ -81,8 +81,8 @@ app.post('/create/:username', function (req, res, next) {
       res.status(500).end()
     } else {
       res.send({
-        errcode: 0,
-        errmsg: 'ok'
+        id: ret.insertedIds[0],
+        errcode: 0
       })
     }
   })
@@ -105,7 +105,8 @@ app.get('/time-entries', function (req, res, next) {
 
 // 删除计划
 app.delete('/delete/:username/:id', function (req, res, next) {
-  var username = req.param.username
+  console.log(req.params)
+  var username = req.params.username
   var _id = req.params.id // req.params是占位符代表的参数对象，也就是{id:XXXXXX},该id是数据库返给前端的
   var collectionName = username + '_mission'
   var collection = _db.collection(collectionName)

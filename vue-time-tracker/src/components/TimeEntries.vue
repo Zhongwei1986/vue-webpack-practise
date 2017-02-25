@@ -23,7 +23,9 @@
           <h3>创建</h3>
         </div>
     
-       <router-view @addNewEntry='entriesUpdate'></router-view>
+       <router-view 
+       @addNewEntry='entriesUpdate'
+       :username='username'></router-view>
   
        <div class="time-entries">
          <p v-if="!timeEntries.length"><strong>还没有任何任务</strong></p>
@@ -86,10 +88,10 @@ export default {
     },
     deleteTimeEntry (timeEntry) {
       var index = this.timeEntries.indexOf(timeEntry)
-      var _id = timeEntry._id
+      var id = timeEntry.id
       var username = this.username
       if (window.confirm('确定要删除吗？')) {
-        this.$http.delete('http://localhost:8888/delete/' + username + '/' + _id)
+        this.$http.delete('http://localhost:8888/delete/' + username + '/' + id)
           .then(function (err) {
             console.log(err)
           })
