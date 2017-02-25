@@ -30,8 +30,8 @@
         </div>
       </nav>
       <router-view
-       @signUpOK='signIn'
-       @signInOk="signIn"  
+       @signUpOK='signUp'
+       @signInOK="signIn"  
        :username = "username"         
       ></router-view>      
     </div>
@@ -48,11 +48,15 @@
       }
     },
     methods: {
-      signIn (userData) {
+      signUp (userData) {
         this.signStatus = true
-        console.log('登陆成功')
         this.username = userData.username
         this.avatar = userData.avatar
+        this.$router.push('time-entries')
+      },
+      signIn (username) {
+        this.signStatus = true
+        this.username = username
         this.$router.push('time-entries')
       }
     }

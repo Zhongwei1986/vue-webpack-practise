@@ -75,11 +75,14 @@ export default {
   },
   methods: {
     getTimeEntries () {
-      this.$http.get('http://localhost:8888/time-entries', this.username)
-        .then(function (ret) {
-          this.timeEntries = ret.data
-          ret.data.forEach(function (item, index) {
-            this.totalTime += item.totalTime
+      var that = this
+      that.$http.get('http://localhost:8888/time-entries/' + that.username)
+        .then(function (res) {
+          var data = res.data
+          that.timeEntries = data
+          console.data
+          data.forEach(function (item) {
+            that.totalTime += item.totalTime
           })
         })
         .then(function (err) {
@@ -88,7 +91,7 @@ export default {
     },
     deleteTimeEntry (timeEntry) {
       var index = this.timeEntries.indexOf(timeEntry)
-      var id = timeEntry.id
+      var id = timeEntry._id
       var username = this.username
       if (window.confirm('确定要删除吗？')) {
         this.$http.delete('http://localhost:8888/delete/' + username + '/' + id)

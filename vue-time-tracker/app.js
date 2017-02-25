@@ -3,9 +3,9 @@ var app = express()
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
 var MongoClient = require('mongodb').MongoClient
+var ObjectID = require('mongodb').ObjectID
 var mongoUrl = 'mongodb://localhost:27017/mission'
 var _db
-var ObjectID = require('mongodb').ObjectID
 
 app.use(morgan('dev'))
 app.use(bodyParser.json())
@@ -57,25 +57,32 @@ app.post('/users', function (req, res, next) {
 
 // 检查用户
 
-app.get('/users/:username/:password', function (req, res, next) {
-  var query = req.params
-  console.log(query)
+app.get('/users/:username/:password', function (req, res) {
+  var username = req.params.username
+  var password = req.params.password
   var collection = _db.collection('users')
-  collection.find({
-    query
-  }, function (err, cursor) {
+  collection.find({ username: username, password: password }, function (err, items) {
     if (err) {
       console.error(err)
+    } else {
+      items.toArray(function (err, itemArr) {
+        if (err) {
+          console.error(err)
+        } else {
+          if (itemArr.length === 1) {
+            res.send({
+              errcode: 0,
+              errmsg: 'user exist'
+            })
+          } else {
+            res.send({
+              errcode: -1,
+              errmsg: 'user do not exist'
+            })
+          }
+        }
+      })
     }
-    cursor.toArray(function (err, itemArr) {
-      for (var i = 0; i < itemArr.length; i++) {
-        console.log(itemArr[i])
-      }
-    })
-    res.send({
-      errcode: 0,
-      errmsg: 'ok'
-    })
   })
 })
 
@@ -112,30 +119,25 @@ app.post('/create/:username', function (req, res, next) {
   })
 })
 
-// 获取列表及时间
-app.get('/time-entries', function (req, res, next) {
-  var username = req.body
+// 获取列表
+app.get('/time-entries/:username', function (req, res) {
+  var username = req.params.username
   var collectionName = username + '_mission'
   var collection = _db.collection(collectionName)
-  collection.find({
-    username: username
-  }).toArray(function (err, ret) {
+  collection.find().toArray(function (err, ret) {
     if (err) {
       console.error(err)
     }
-    console.log(ret)
-    res.json(ret)
+    res.send(ret)
   })
 })
 
 // 删除计划
 app.delete('/delete/:username/:id', function (req, res, next) {
-  console.log(req.params)
   var username = req.params.username
   var _id = req.params.id // req.params是占位符代表的参数对象，也就是{id:XXXXXX},该id是数据库返给前端的
   var collectionName = username + '_mission'
   var collection = _db.collection(collectionName)
-  console.log(req.params)
     // 使用mongodb的唯一ObjectId字段查找出对应id删除记录
   collection.remove({
     _id: new ObjectID(_id) // 生成ObjectID对象，用于定位对应文档
