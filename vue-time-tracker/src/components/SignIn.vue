@@ -32,7 +32,7 @@
      </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">       
-          <button type="submit" class="btn btn-default">登陆</button>
+          <button  @click="signIn" type="submit" class="btn btn-default">登陆</button>
         </div>
       </div>     
     </form>
@@ -50,7 +50,9 @@ export default {
   },
   methods: {
     signIn () {
-      this.$http.get('http://localhost:8888/time/')
+      var username = this.username
+      var password = this.password
+      this.$http.get('http://localhost:8888/users/' + username + '/' + password)
       .then(function (ret) {
         // console.log(ret)
         this.totalTime = ret.data.time

@@ -51,11 +51,11 @@ export default {
       let file = fileInput.files[0]
       console.log(file)
       let user = {
-        name: this.username,
+        username: this.username,
         password: this.password,
         avatar: file
       }
-      this.$http.post('http://localhost:8888/users', {user})
+      this.$http.post('http://localhost:8888/users', user)
       .then(function (res) {
         if (res.data.errcode === 0) {
           this.$emit('signUpOK', {

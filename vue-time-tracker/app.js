@@ -55,9 +55,33 @@ app.post('/users', function (req, res, next) {
   })
 })
 
+// 检查用户
+
+app.get('/users/:username/:password', function (req, res, next) {
+  var query = req.params
+  console.log(query)
+  var collection = _db.collection('users')
+  collection.find({
+    query
+  }, function (err, cursor) {
+    if (err) {
+      console.error(err)
+    }
+    cursor.toArray(function (err, itemArr) {
+      for (var i = 0; i < itemArr.length; i++) {
+        console.log(itemArr[i])
+      }
+    })
+    res.send({
+      errcode: 0,
+      errmsg: 'ok'
+    })
+  })
+})
+
 // 增加列表
 app.post('/create/:username', function (req, res, next) {
-  var username = req.param.username
+  var username = req.params.username
   var mission = req.body
   var collectionName = username + '_mission'
   var collection = _db.collection(collectionName)
@@ -99,6 +123,7 @@ app.get('/time-entries', function (req, res, next) {
     if (err) {
       console.error(err)
     }
+    console.log(ret)
     res.json(ret)
   })
 })
