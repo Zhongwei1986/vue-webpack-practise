@@ -32,8 +32,7 @@
       <router-view
        @signUpOK='signUp'
        @signInOK="signIn"  
-       :username = "username"         
-      ></router-view>      
+       :username = "username"></router-view>      
     </div>
 </template>
 
